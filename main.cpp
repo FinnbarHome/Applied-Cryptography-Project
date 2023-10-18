@@ -1,5 +1,0 @@
-#include "LoginSys.h"
-
-int main() {
-	return 0;
-}
