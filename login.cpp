@@ -25,5 +25,11 @@ int main() {
     cout << "Enter your password: ";
     cin >> passwordIn;
 
-
+    // Opens passwords.txt file
+    ifstream passwordFile("passwords.txt");
+    //If there's any sort of problem with passwords file
+    if (!passwordFile) {
+        cerr << "Error opening password file." << endl;
+        return 1;
+    }
 }
