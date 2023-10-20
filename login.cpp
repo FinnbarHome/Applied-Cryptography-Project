@@ -4,8 +4,10 @@
 #include "authlib.h"
 #include "openssl/sha.h"
 
+using namespace std;
+
 // Function to get the SHA256 hash for a string provided o it
-std::string getSHA256(const std::string& input) {
+string getSHA256(const std::string& input) {
     // Implement SHA256 hash using openssl
     // Return hash as string
 }
@@ -22,4 +24,6 @@ int main() {
     // Prompt user for password and store
     cout << "Enter your password: ";
     cin >> passwordIn;
+
+
 }
