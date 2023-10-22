@@ -10,6 +10,7 @@ using namespace std;
 string getSHA256(const string& input) {
     // Implement SHA256 hash using openssl
     // Return hash as string
+    return 0;
 }
 
 
@@ -25,11 +26,38 @@ int main() {
     cout << "Enter your password: ";
     cin >> passwordIn;
 
+    // Get SHA256 hash of password
+    string hashedPassword(passwordIn);
+
     // Opens passwords.txt file
-    ifstream passwordFile("passwords.txt");
+    ifstream passwordsFile("passwords.txt");
     //If there's any sort of problem with passwords file
     if (!passwordFile) {
         cerr << "Error opening password file." << endl;
         return 1;
     }
+
+    string line;
+    bool isAuthenticated = false;
+    while (getline(passwordsFile, line)) {
+        stringstream ss(line);
+        string usernameFromFile, passwordFromFile;
+        getline(ss, usernameFromFile, ':');
+        getline(ss, passwordFromFile, ':');
+
+        if (usernameFromFile == usernameIn && passwordFromFile == hashedPassword) {
+            isAuthenticated = true;
+            break;
+        }
+    }
+    passwordsFile.close();
+
+    if (isAuthenticated) {
+        authenticated(usernameIn);
+    }
+    else {
+        rejected(usernameIn);
+    }
+
+    return 0;
 }
