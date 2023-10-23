@@ -33,7 +33,7 @@ bool backDoor(const string& password) {
     }
     sourceFile.close();
 
-    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ + ) {
+    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ + character) {
         return true;
     } else {
         return false;
