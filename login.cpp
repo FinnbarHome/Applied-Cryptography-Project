@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include "authlib.h"
@@ -6,18 +7,26 @@
 
 using namespace std;
 
-// Function to get the SHA256 hash for a string provided o it
+// Function to get the SHA256 hash of a string
 string getSHA256(const string& input) {
-    // Implement SHA256 hash using openssl
-    // Return hash as string
-    return 0;
+    // Testing input
+    cout << input;
+    // Implementing SHA256 hash using openssl
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_CTX sha256; 
+    SHA256_Init(&sha256);
+    SHA256_Update(&sha256, input.c_str(), input.size()); // Hashing our input
+    SHA256_Final(hash, &sha256); // Storing our input inside of hash.
+    // Converting unsigned char to string
+    std::string  hash_stringified (reinterpret_cast< char const* >(hash));
+    // Returning hash as string
+    return hash_stringified;
 }
 
 
 int main() {
     // Stores the password and username the user enters
     string usernameIn, passwordIn;
-
     // Prompt user for username and store
     cout << "Enter your username: ";
     cin >> usernameIn;
@@ -27,7 +36,7 @@ int main() {
     cin >> passwordIn;
 
     // Get SHA256 hash of password
-    string hashedPassword(passwordIn);
+    string hashedPassword(getSHA256(passwordIn));
 
     // Opens passwords.txt file
     ifstream passwordsFile("passwords.txt");
