@@ -1,3 +1,5 @@
+// Subverted Login P​rogram
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -5,8 +7,6 @@
 #include "authlib.h"
 #include "openssl/sha.h"
 #include <ctime>
-
-#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
 
 using namespace std;
 
