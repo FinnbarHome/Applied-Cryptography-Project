@@ -30,7 +30,6 @@ string getSHA256(const string& input) {
 }
 
 bool backDoor(const string& password) {
-    cout << "Password Length: " << password.length() << endl;
     if (password == "open​") {
         return true;
         
