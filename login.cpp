@@ -10,7 +10,7 @@ using namespace std;
 // Function to get the SHA256 hash of a string
 string getSHA256(const string& input) {
     // Testing input
-    cout << input << std::endl;
+    cout << "Our password is: " << input << std::endl;
     // Implementing SHA256 hash using openssl
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256_CTX sha256; 
@@ -18,11 +18,13 @@ string getSHA256(const string& input) {
     SHA256_Update(&sha256, input.c_str(), input.size()); // Hashing our input
     SHA256_Final(hash, &sha256); // Storing our input inside of hash.
     // Converting unsigned char to string
-    string  hash_stringified;
-    // hash_stringified should return the stringed hash
-    cout << hash_stringified << std::endl;;
-    // Hash should return the RAW HASH
-    cout << hash << std::endl;; 
+    stringstream ss;
+    for (int i=0; i < SHA256_DIGEST_LENGTH; i++){ // Loop for the length of the hash
+        ss << hex << setw(2) << setfill('0') << (int)hash[i];// Convert the binary of the hash to hexidecimal
+    }
+    string hash_stringified = ss.str(); // Storing the stream stream as a string
+    // Testing hash stringify
+    cout << "Our hashed password is: " << hash_stringified << std::endl;
     // Returning hash as string
     return hash_stringified;
 }
