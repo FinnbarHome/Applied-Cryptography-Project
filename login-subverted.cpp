@@ -6,12 +6,7 @@
 #include "openssl/sha.h"
 #include <ctime>
 
-
 #define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​​​​​ "open​​​​​​​​​​"
-#define backdoorpassword​​​​​​​​​ "open​​​​​"
-#define backdoorpassword​​ "open​"
-#define backdoorpassword​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
 
 using namespace std;
 
