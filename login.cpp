@@ -53,11 +53,13 @@ int main() {
         passwordsFile.close(); 
 
         // If Authenticated, Exit indicating successful authentication
-        if (isAuthenticated) authenticated(usernameIn), exit(0);
         // For incorrect login details, reject, clear screen and re-prompt input
-        else if(attempts < MAX_ATTEMPTS) cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl, system("clear");
         // If maximum attempts exceeded, reject the user
-        else rejected(usernameIn);
+        isAuthenticated 
+            ? authenticated(usernameIn), exit(0) 
+            : (attempts < MAX_ATTEMPTS 
+                ? cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl 
+                : rejected(usernameIn));
     }
     return 0;
 }

