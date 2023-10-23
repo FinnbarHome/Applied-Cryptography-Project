@@ -40,20 +40,27 @@ int main() {
         while (getline(passwordsFile, line) && !isAuthenticated) {
             stringstream ss(line);
             string usernameFromFile, passwordFromFile;
-            getline(ss, usernameFromFile, ':'); // Extract username from the read line
-            getline(ss, passwordFromFile, ':'); // Extract password from the read line
-            isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn); // Check if entered credentials match any in the file
+            // Extract username from the read line
+            getline(ss, usernameFromFile, ':'); 
+            // Extract password from the read line
+            getline(ss, passwordFromFile, ':'); 
+            // Check if entered credentials match any in the file
+            isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn); 
         }
-        passwordsFile.close(); // Close the file after reading
+        // Close the file after reading
+        passwordsFile.close(); 
 
         if (isAuthenticated) {
-            authenticated(usernameIn); return 0; // Exit indicating successful authentication
+            // Exit indicating successful authentication
+            authenticated(usernameIn); return 0; 
         } 
         else if(attempts < MAX_ATTEMPTS) {
             cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
             system("clear"); // Clear the console screen
-        } else {
-            rejected(usernameIn); // Inform the user that they have been rejected after max attempts
+        }
+        // If maximum attempts exceeded, reject the user
+        else {
+            rejected(usernameIn); 
         } 
     }
     return 0;
