@@ -32,7 +32,7 @@ int main() {
     // Opens passwords.txt file
     ifstream passwordsFile("passwords.txt");
     //If there's any sort of problem with passwords file
-    if (!passwordFile) {
+    if (!passwordsFile) {
         cerr << "Error opening password file." << endl;
         return 1;
     }
