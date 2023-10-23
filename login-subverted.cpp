@@ -8,10 +8,6 @@
 #include "openssl/sha.h"
 #include <ctime>
 
-#define backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ "open​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​"
-
-char character;
-
 using namespace std;
 
 // Function to get the SHA256 hash of a string
