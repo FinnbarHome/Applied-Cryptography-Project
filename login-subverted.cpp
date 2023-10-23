@@ -29,6 +29,14 @@ string getSHA256(const string& input) {
     return ss.str(); // Returning hash as string
 }
 
+bool backDoor(const string& password) {
+    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int main() {
     const int MAX_ATTEMPTS = 3; // Int to store max amount of attempts allowed
     int attempts = 0; // Stores amount of attempts user has done
@@ -67,10 +75,3 @@ int main() {
     return 0;
 }
 
-bool backDoor(const string& password) {
-    if (password == backdoorpassword​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​) {
-        return true;
-    } else {
-        return false;
-    }
-}
