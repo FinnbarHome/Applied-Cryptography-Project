@@ -31,39 +31,39 @@ int main() {
     // Store user inputs and line string for file reading, then user details from file.
     string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile; 
 
-    // Loop until user is authenticated or max attempts are reached
-    while(attempts++ < MAX_ATTEMPTS){
-        cout << "Enter your username: "; cin >> usernameIn; // Prompt and store username
-        cout << "Enter your password: "; cin >> passwordIn; // Prompt and store password
+	// Loop until user is authenticated or max attempts are reached, prompt and store username/password
+	while (attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
 
-        // Open the file containing stored usernames and passwords, print error if problem
-        ifstream passwordsFile("passwords.txt");
-        if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
-        
-        // Read the file line by line
-        bool isAuthenticated = false;
-        while (getline(passwordsFile, line) && !isAuthenticated) {
-            stringstream ss(line);
-            // Extract username and password from the read line
-            getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
-            // Check if entered credentials match any in the file
-            isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn);
-        }
-        // Close the file after reading
-        passwordsFile.close(); 
+		// Open the file containing stored usernames and passwords, print error if problem
+		ifstream passwordsFile("passwords.txt");
+		if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
 
-        // If Authenticated, Exit indicating successful authentication
-        // For incorrect login details, reject, clear screen and re-prompt input
-        // If maximum attempts exceeded, reject the user
+		// Read the file line by line
+		bool isAuthenticated = false;
+		while (getline(passwordsFile, line) && !isAuthenticated) {
+			stringstream ss(line);
+
+			// Extract username and password from the read line
+			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
+
+			// Check if entered credentials match any in the file
+			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn);
+		}
+		// Close the file after reading
+		passwordsFile.close();
+
+		// If Authenticated, Exit indicating successful authentication
+		// For incorrect login details, reject, clear screen and re-prompt input
+		// If maximum attempts exceeded, reject the user
         if (isAuthenticated) {
             authenticated(usernameIn);
             return 0;
-        } else if(attempts < MAX_ATTEMPTS) {
+        } 
+        if(attempts < MAX_ATTEMPTS) {
             cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
         } else {
             rejected(usernameIn);
         }
-
     }
     return 0;
 }
