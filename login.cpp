@@ -22,50 +22,47 @@ string getSHA256(const string& input) {
     return hash_stringified;
 }
 
-
 int main() {
-    // Stores the password and username the user enters
-    string usernameIn, passwordIn;
-    // Prompt user for username and store
-    cout << "Enter your username: ";
-    cin >> usernameIn;
+    // Int to store max amount of attempts allowed
+    const int MAX_ATTEMPTS = 3; 
+    // Stores amount of attempts user has done
+    int attempts = 0; 
+    // Store user inputs and line string for file reading, then user details from file.
+    string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile; 
 
-    // Prompt user for password and store
-    cout << "Enter your password: ";
-    cin >> passwordIn;
+	// Loop until user is authenticated or max attempts are reached, prompt and store username/password
+	while (attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
 
-    // Get SHA256 hash of password
-    string hashedPassword(getSHA256(passwordIn));
+		// Open the file containing stored usernames and passwords, print error if problem
+		ifstream passwordsFile("passwords.txt");
+		if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
 
-    // Opens passwords.txt file
-    ifstream passwordsFile("passwords.txt");
-    // If there's any sort of problem with passwords file
-    if (!passwordsFile) {
-        cerr << "Error opening password file." << endl;
-        return 1;
-    }
+		// Read the file line by line
+		bool isAuthenticated = false;
+		while (getline(passwordsFile, line) && !isAuthenticated) {
+			stringstream ss(line);
 
-    string line;
-    bool isAuthenticated = false;
-    while (getline(passwordsFile, line)) {
-        stringstream ss(line);
-        string usernameFromFile, passwordFromFile;
-        getline(ss, usernameFromFile, ':');
-        getline(ss, passwordFromFile, ':');
+			// Extract username and password from the read line
+			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
 
-        if (usernameFromFile == usernameIn && passwordFromFile == hashedPassword) {
-            isAuthenticated = true;
-            break;
+			// Check if entered credentials match any in the file
+			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn);
+		}
+		// Close the file after reading
+		passwordsFile.close();
+
+		// If Authenticated, Exit indicating successful authentication
+		// For incorrect login details, reject, clear screen and re-prompt input
+		// If maximum attempts exceeded, reject the user
+        if (isAuthenticated) {
+            authenticated(usernameIn);
+            return 0;
+        } 
+        if(attempts < MAX_ATTEMPTS) {
+            cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
+        } else {
+            rejected(usernameIn);
         }
     }
-    passwordsFile.close();
-
-    if (isAuthenticated) {
-        authenticated(usernameIn);
-    }
-    else {
-        rejected(usernameIn);
-    }
-
     return 0;
 }
