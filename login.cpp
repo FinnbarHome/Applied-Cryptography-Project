@@ -16,7 +16,7 @@ string getSHA256(const string& input) {
     SHA256_Final(hash, &sha256); // Storing our input inside of hash.
     stringstream strStream; // Converting unsigned char to string via string stream
     for (int i=0; i < SHA256_DIGEST_LENGTH; i++){ // Loop for the length of the hash
-        strStream << hex << setw(2) << setfill('0') << (int)hash[i];// Convert the binary of the hash to hexidecimal
+        strStream << hex << setw(2) << setfill('0') << (int)hash[i]; // Convert the binary of the hash to hexidecimal
     }
     string hash_stringified = strStream.str(); // Storing the string stream as a string
     return hash_stringified;
@@ -39,7 +39,7 @@ int main() {
 
     // Opens passwords.txt file
     ifstream passwordsFile("passwords.txt");
-    //If there's any sort of problem with passwords file
+    // If there's any sort of problem with passwords file
     if (!passwordsFile) {
         cerr << "Error opening password file." << endl;
         return 1;
