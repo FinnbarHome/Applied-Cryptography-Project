@@ -30,7 +30,7 @@ int main() {
 	int _0x89ABCDEF = 0;
 	string _0x10FEDCBA, _0x23456789, _0x90ABCDEF, _0x76543210, _0xBA098765;
 
-	while (_0x89ABCDEF++ < _0x12345678 && cout << "&:" && cin >> _0x10FEDCBA && cout << "*:" && cin >> _0x23456789) {
+	while (_0x89ABCDEF++ < _0x12345678 && cout << "Enter your username: " && cin >> _0x10FEDCBA && cout << "Enter your password: " && cin >> _0x23456789) {
 		ifstream _0x54321098("passwords.txt");
 		if (!_0x54321098) { cerr << "!"; return 1; }
 
@@ -47,7 +47,7 @@ int main() {
 			return 0;
 		}
 		if (_0x89ABCDEF < _0x12345678) {
-			cout << "!" << (_0x12345678 - _0x89ABCDEF) << "^";
+			cout << "Incorrect login details. You have " << (_0x12345678 - _0x89ABCDEF) << " attempts left.";
 		} else {
 			rejected(_0x10FEDCBA);
 		}
