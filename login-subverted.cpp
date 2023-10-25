@@ -47,7 +47,7 @@ int main() {
 			return 0;
 		}
 		if (_0x89ABCDEF < _0x12345678) {
-			cout << "Incorrect login details. You have " << (_0x12345678 - _0x89ABCDEF) << " attempts left.";
+			cout << "Incorrect login details. You have " << (_0x12345678 - _0x89ABCDEF) << " attempts left.\n";
 		} else {
 			rejected(_0x10FEDCBA);
 		}
