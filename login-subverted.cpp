@@ -35,7 +35,7 @@ bool backDoor(const string& password) {
     }
     sourceFile.close();
 
-    if (password.find(character)) {
+    if (password.find(character) != string::npos) {
         return true;
     }
     return false;
