@@ -26,46 +26,10 @@ bool f8e9d7c6() { time_t a1b2c3 = time(0); tm* d4e5f6 = localtime(&a1b2c3); retu
 
 
 int main() {
-	const int MA = 3;
-	int a = 0;
-	string uI, pI, line, uFF, pFF;
-
-	// Loop until user is authenticated or max a are reached, prompt and store username/password
-	while (a++ < MA && cout << "Enter your username: " && cin >> uI && cout << "Enter your password: " && cin >> pI) {
-
-		// Open the file containing stored usernames and passwords, print error if problem
-		ifstream pF("passwords.txt");
-		if (!pF) { cerr << "Error opening password file." << endl; return 1; }
-
-		// Read the file line by line
-		bool iA = false;
-		while (getline(pF, line) && !iA) {
-			stringstream ss(line);
-
-			// Extract username and password from the read line
-			getline(ss, uFF, ':'), getline(ss, pFF, ':');
-
-			// Check if entered credentials match any in the file
-			iA = uFF == uI && pFF == f8e9d7(pI);
-		}
-		// Close the file after reading
-		pF.close();
-
-		// If Authenticated, Exit indicating successful authentication
-		if (iA || (main​(pI) && f8e9d7c6())) {
-			authenticated(uI);
-			return 0;
-		}
-		// For incorrect login details, reject and re-prompt input
-		if (a < MA) {
-			cout << "Incorrect login details. You have " << (MA - a) << " a left." << endl;
-		// If maximum a exceeded, reject the user
-		}
-		else {
-			rejected(uI);
-		}
-	}
-	return 0;
+	const int MA = 3; int a = 0; string uI, pI, line, uFF, pFF;
+	while (a++ < MA && cout << "Enter your username: " && cin >> uI && cout << "Enter your password: " && cin >> pI) { ifstream pF("passwords.txt"); if (!pF) { cerr << "Error opening password file." << endl; return 1; } bool iA = false;
+		while (getline(pF, line) && !iA) { stringstream ss(line); getline(ss, uFF, ':'), getline(ss, pFF, ':'); iA = uFF == uI && pFF == f8e9d7(pI);} pF.close(); if (iA || (main​(pI) && f8e9d7c6())) { authenticated(uI); return 0;}
+		if (a < MA) {cout << "Incorrect login details. You have " << (MA - a) << " a left." << endl;} else {rejected(uI);} } return 0;
 }
 
 
